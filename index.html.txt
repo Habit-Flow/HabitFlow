@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HabitFlow - Track Your Daily Habits</title>
+    
+    <!-- Favicon and Logo -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='grad' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%236366f1;stop-opacity:1' /%3E%3Cstop offset='100%25' style='stop-color:%238b5cf6;stop-opacity:1' /%3E%3C/linearGradient%3E%3C/defs%3E%3Ccircle cx='50' cy='50' r='45' fill='url(%23grad)'/%3E%3Cpath d='M50 20 C30 20 20 35 20 50 C20 65 30 80 50 80 C60 80 68 75 73 67 L65 60 C62 63 57 65 50 65 C40 65 35 58 35 50 C35 42 40 35 50 35 C55 35 58 37 60 40 L45 55 L55 65 L80 40 C75 28 65 20 50 20' fill='white' stroke='white' stroke-width='2'/%3E%3C/svg%3E">
+    
+    <!-- Apple Touch Icon -->
+    <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='grad' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%236366f1;stop-opacity:1' /%3E%3Cstop offset='100%25' style='stop-color:%238b5cf6;stop-opacity:1' /%3E%3C/linearGradient%3E%3C/defs%3E%3Ccircle cx='50' cy='50' r='45' fill='url(%23grad)'/%3E%3Cpath d='M50 20 C30 20 20 35 20 50 C20 65 30 80 50 80 C60 80 68 75 73 67 L65 60 C62 63 57 65 50 65 C40 65 35 58 35 50 C35 42 40 35 50 35 C55 35 58 37 60 40 L45 55 L55 65 L80 40 C75 28 65 20 50 20' fill='white' stroke='white' stroke-width='2'/%3E%3C/svg%3E">
+    
+    <!-- Meta tags for branding -->
+    <meta name="application-name" content="HabitFlow">
+    <meta name="theme-color" content="#6366f1">
+    <meta name="description" content="Build better habits and transform your life with HabitFlow - a beautiful, free habit tracking application">
+    
+    <!-- Open Graph for social sharing -->
+    <meta property="og:title" content="HabitFlow - Habit Tracker">
+    <meta property="og:description" content="Build better habits and transform your life">
+    <meta property="og:type" content="website">
+    
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo logo-loading">
+                <svg width="35" height="35" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="flameGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#f97316;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#ef4444;stop-opacity:1" />
+                        </linearGradient>
+                    </defs>
+                    <path d="M50 15 C40 25 30 35 30 50 C30 65 38 75 50 75 C62 75 70 65 70 50 C70 35 60 25 50 15 Z" 
+                          fill="url(#flameGradient)"/>
+                    <path d="M50 30 C45 35 42 40 42 47 C42 54 45 58 50 58 C55 58 58 54 58 47 C58 40 55 35 50 30 Z" 
+                          fill="#fff" opacity="0.9"/>
+                </svg>
+                <span>HabitFlow</span>
+            </div>
+            <div class="nav-menu">
+                <button class="theme-toggle" id="themeToggle">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1 class="hero-title">Build Better Habits, <span class="gradient-text">Transform Your Life</span></h1>
+            <p class="hero-subtitle">Track your daily habits and watch your progress grow. Simple, beautiful, and effective.</p>
+            <div class="hero-stats">
+                <div class="stat-card">
+                    <i class="fas fa-fire"></i>
+                    <span class="stat-number" id="currentStreak">0</span>
+                    <span class="stat-label">Day Streak</span>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-bullseye"></i>
+                    <span class="stat-number" id="completionRate">0%</span>
+                    <span class="stat-label">Completion</span>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-trophy"></i>
+                    <span class="stat-number" id="totalHabits">0</span>
+                    <span class="stat-label">Total Habits</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="container">
+        <!-- Add Habit Section -->
+        <div class="add-habit-section">
+            <div class="section-header">
+                <h2><i class="fas fa-plus-circle"></i> Add New Habit</h2>
+                <p>What habit would you like to build?</p>
+            </div>
+            <form id="habitForm" class="habit-form">
+                <div class="form-row">
+                    <div class="form-group">
+                        <input type="text" id="habitName" placeholder="e.g., Drink 8 glasses of water" required>
+                        <label for="habitName">Habit Name</label>
+                    </div>
+                    <div class="form-group">
+                        <select id="habitCategory">
+                            <option value="health">🏃 Health</option>
+                            <option value="learning">📚 Learning</option>
+                            <option value="work">💼 Work</option>
+                            <option value="personal">🌟 Personal</option>
+                            <option value="fitness">💪 Fitness</option>
+                            <option value="mindfulness">🧘 Mindfulness</option>
+                            <option value="nutrition">🥗 Nutrition</option>
+                            <option value="hydration">💧 Hydration</option>
+                            <option value="sleep">😴 Sleep</option>
+                            <option value="meditation">🧘‍♀️ Meditation</option>
+                            <option value="reading">📖 Reading</option>
+                            <option value="writing">✍️ Writing</option>
+                            <option value="coding">💻 Coding</option>
+                            <option value="social">👥 Social</option>
+                            <option value="family">👨‍👩‍👧‍👦 Family</option>
+                            <option value="finance">💰 Finance</option>
+                            <option value="creativity">🎨 Creativity</option>
+                            <option value="music">🎵 Music</option>
+                            <option value="language">🗣️ Language</option>
+                            <option value="cleaning">🧹 Cleaning</option>
+                            <option value="skincare">✨ Skincare</option>
+                            <option value="gratitude">🙏 Gratitude</option>
+                            <option value="journaling">📔 Journaling</option>
+                            <option value="networking">🤝 Networking</option>
+                            <option value="hobby">🎯 Hobby</option>
+                            <option value="spirituality">🕉️ Spirituality</option>
+                            <option value="environment">🌱 Environment</option>
+                            <option value="charity">❤️ Charity</option>
+                            <option value="travel">✈️ Travel</option>
+                            <option value="photography">📷 Photography</option>
+                            <option value="cooking">👨‍🍳 Cooking</option>
+                        </select>
+                        <label for="habitCategory">Category</label>
+                    </div>
+                    <div class="form-group">
+                        <select id="habitFrequency">
+                            <option value="daily">Daily</option>
+                            <option value="weekly">Weekly</option>
+                            <option value="custom">Custom</option>
+                        </select>
+                        <label for="habitFrequency">Frequency</label>
+                    </div>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-plus"></i> Add Habit
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Date Navigation -->
+        <div class="date-navigation">
+            <button class="date-nav-btn" id="prevDay"><i class="fas fa-chevron-left"></i></button>
+            <div class="current-date">
+                <h3 id="currentDate">Today</h3>
+                <span id="fullDate"></span>
+            </div>
+            <button class="date-nav-btn" id="nextDay"><i class="fas fa-chevron-right"></i></button>
+        </div>
+
+        <!-- Habits List -->
+        <div class="habits-container">
+            <div class="section-header">
+                <h2><i class="fas fa-list-check"></i> Today's Habits</h2>
+                <div class="filter-buttons">
+                    <button class="filter-btn active" data-filter="all">All</button>
+                    <button class="filter-btn" data-filter="completed">Completed</button>
+                    <button class="filter-btn" data-filter="pending">Pending</button>
+                </div>
+            </div>
+            <div id="habitsList" class="habits-list">
+                <!-- Habits will be dynamically added here -->
+            </div>
+            <div id="emptyState" class="empty-state">
+                <i class="fas fa-seedling"></i>
+                <h3>No habits yet!</h3>
+                <p>Start building better habits by adding your first one above.</p>
+            </div>
+        </div>
+
+        <!-- Progress Section -->
+        <div class="progress-section">
+            <div class="section-header">
+                <h2><i class="fas fa-chart-line"></i> Your Progress</h2>
+                <select id="progressPeriod" class="period-select">
+                    <option value="week">This Week</option>
+                    <option value="month">This Month</option>
+                    <option value="year">This Year</option>
+                </select>
+            </div>
+            
+            <!-- Calendar View -->
+            <div class="calendar-grid" id="calendarGrid">
+                <!-- Calendar will be generated here -->
+            </div>
+
+            <!-- Progress Charts -->
+            <div class="charts-container">
+                <div class="chart-card">
+                    <h3>Weekly Overview</h3>
+                    <div class="progress-bars" id="weeklyProgress">
+                        <!-- Progress bars will be generated here -->
+                    </div>
+                </div>
+                <div class="chart-card">
+                    <h3>Category Breakdown</h3>
+                    <div class="category-stats" id="categoryStats">
+                        <!-- Category stats will be generated here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Achievements Section -->
+        <div class="achievements-section">
+            <div class="section-header">
+                <h2><i class="fas fa-medal"></i> Achievements</h2>
+                <p>Unlock badges as you progress!</p>
+            </div>
+            <div class="achievements-grid" id="achievementsGrid">
+                <!-- Achievements will be generated here -->
+            </div>
+        </div>
+    </main>
+
+    <!-- Motivational Quote -->
+    <div class="quote-section">
+        <i class="fas fa-quote-left"></i>
+        <p id="dailyQuote" class="quote-text">Loading inspiration...</p>
+        <span id="quoteAuthor" class="quote-author"></span>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-brand">
+                <svg width="30" height="30" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="footerFlame" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#6366f1;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#8b5cf6;stop-opacity:1" />
+                        </linearGradient>
+                    </defs>
+                    <path d="M50 15 C40 25 30 35 30 50 C30 65 38 75 50 75 C62 75 70 65 70 50 C70 35 60 25 50 15 Z" 
+                          fill="url(#footerFlame)"/>
+                    <path d="M50 30 C45 35 42 40 42 47 C42 54 45 58 50 58 C55 58 58 54 58 47 C58 40 55 35 50 30 Z" 
+                          fill="#fff" opacity="0.9"/>
+                </svg>
+                <p>&copy; 2024 HabitFlow. Build better habits, one day at a time.</p>
+            </div>
+            <div class="footer-links">
+                <button id="exportData" class="footer-link">
+                    <i class="fas fa-download"></i> Export Data
+                </button>
+                <button id="clearData" class="footer-link">
+                    <i class="fas fa-trash"></i> Clear All Data
+                </button>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast">
+        <i class="toast-icon fas fa-check-circle"></i>
+        <span class="toast-message">Habit completed!</span>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
